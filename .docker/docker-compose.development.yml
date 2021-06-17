@@ -1,0 +1,56 @@
+version: "3.9"
+services:
+  gateway:
+    build:
+      context: ./.docker/gateway
+      dockerfile: Dockerfile
+    ports:
+      - "7070:80"
+      - "7071:81"
+      - "7073:83"
+      - "7074:84"
+
+    cap_add:
+      - ALL
+    environment:
+      - NGINX_PORT=80
+    volumes:
+      - ./.docker/gateway/nginx.conf:/etc/nginx/nginx.conf
+
+
+  cassandra-node1:
+    image: bitnami/cassandra:3
+    volumes:
+      - ./tmp/cassandra-node1:/bitnami
+    ports:
+      - 7000:7000
+      - 9042:9042
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2,cassandra-node3
+      - CASSANDRA_PASSWORD=cassandra
+      - CASSANDRA_PASSWORD_SEEDER=yes
+
+  cassandra-node2:
+    image: bitnami/cassandra:3
+    volumes:
+      - ./tmp/cassandra-node2:/bitnami
+    ports:
+      - 7001:7000
+      - 9043:9042
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2,cassandra-node3
+      - CASSANDRA_PASSWORD=cassandra
+
+  cassandra-node3:
+    image: bitnami/cassandra:3
+    volumes:
+      - ./tmp/cassandra-node3:/bitnami
+    ports:
+      - 7003:7000
+      - 9044:9042
+    environment:
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - CASSANDRA_SEEDS=cassandra-node1,cassandra-node2,cassandra-node3
+      - CASSANDRA_PASSWORD=cassandra

@@ -1,0 +1,8 @@
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+### Directly
+GET https://meteo.arso.gov.si/uploads/probase/www/observ/surface/text/sl/observationAms_LJUBL-ANA_BEZIGRAD_latest.xml
+
+### Via proxy
+GET http://localhost:7074/uploads/probase/www/observ/surface/text/sl/observationAms_LJUBL-ANA_BEZIGRAD_latest.xml

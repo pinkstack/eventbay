@@ -1,0 +1,5 @@
+### SPIN3
+GET http://127.0.0.1:7070/javno/assets/data/lokacija.json
+Accept: application/json
+
+###

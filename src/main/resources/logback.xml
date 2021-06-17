@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- <level>INFO</level> -->
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <!-- <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg MDC: {%mdc}%n</pattern> -->
+            <!-- <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg</pattern> -->
+<!--            <pattern>%-5level [%thread] %d{HH:mm:ss.SSS} %logger{15} - %msg%n%rEx</pattern>-->
+            <pattern>%-5level %d{HH:mm:ss.SSS} %logger{15} - %msg%n%rEx</pattern>
+
+        </encoder>
+        <!-- <immediateFlush>true</immediateFlush> -->
+
+    </appender>
+
+    <!--
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/myapp-dev.log</file>
+        <encoder>
+            <pattern>[%date{ISO8601}] [%level] [%logger] [%marker] [%thread] - %msg MDC: {%mdc}%n</pattern>
+        </encoder>
+    </appender>
+    -->
+
+    <!-- <logger name="com.pinkstack" level="${PINKSTACK_LOG_LEVEL:-INFO}" /> -->
+    <!-- <logger name="akka" level="${AKKA_LOG_LEVEL:-INFO}" /> -->
+    <logger name="com.pinkstack" level="DEBUG"/>
+    <logger name="akka" level="DEBUG"/>
+
+    <logger name="akka.http" level="${AKKA_HTTP_LOG_LEVEL:-INFO}"/>
+    <logger name="com.datastax" level="${CASSANDRA_LOG_LEVEL:-INFO}"/>
+    <logger name="oshi.util" level="INFO"/>
+
+
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <!-- <appender-ref ref="FILE"/> -->
+    </root>
+</configuration>
